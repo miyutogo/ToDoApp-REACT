@@ -10,11 +10,11 @@ const List = ({items, removeItem, editItem}) =>{
 			const {id,title} = item
 			return (
 			<article key={id} className='toDoItem'>
-				<p className='title'>{title}</p>
-				<div className='btnContainer'>
-					<Button  className='deleteBtn' onClick={()=>removeItem(id)}>dlt</Button>
-					<Button className='editBtn' onClick={()=>editItem(id)}>edt</Button>
-				</div>
+				<Container className='btnContainer'>
+					<p className='title'>{title}</p>
+					<Button  className='deleteBtn' onClick={()=>removeItem(id)}>Done</Button>
+					<Button className='editBtn' onClick={()=>editItem(id)}>Edit</Button>
+				</Container>
 			</article>
 			)
 		})}

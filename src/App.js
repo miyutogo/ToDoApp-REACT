@@ -91,42 +91,46 @@ function App() {
   }, [list]);
 
   return (
-    <Container>
-      <Box 
-        borderColor="primary.main" 
-        border={2} 
-        width='25%'
-        >
-        <Container>
-              {alert.show && <Alert {...alert} removeAlert={showAlert} list={list}/>}
-        </Container>
-
-        <h3>To Do List </h3>
-        
-        <FormControl >
-            <InputLabel htmlFor="my-input">Enter a Task</InputLabel>
-            <Input 
-                id="my-input" 
-                aria-describedby="my-helper-text" 
-                value={name} 
-                onChange={(e)=> setName(e.target.value)} 
-            />
-            <FormHelperText id="my-helper-text">E.g. write an email.</FormHelperText>
-            <Button className='submit-btn' onClick={handleSubmit}>
-              {editing? 'edit' : 'submit'}
-            </Button>
-        </FormControl>
-
-        {list.length > 0 && (
-          <Container className='toDoContainer'>
-              <List items={list} removeItem={removeItem} editItem={editItem}/>
-              <Button className='btn btn-primary' onClick={clearList}>
-                clear items
-              </Button>
+    <Container sx={{ mx: "auto", width: 1000 }}>
+      <Container sx={{ mx: "auto", width: 250 }}>
+      
+          <Container sx={{ mx: "auto", height: 100 }}>
+                <h1>To Do List </h1>
+                <p>{alert.show && <Alert {...alert} removeAlert={showAlert} list={list}/>}</p>
+                
           </Container>
-        )
-        }
-      </Box >
+
+          <FormControl >
+              <InputLabel htmlFor="my-input">Enter a Task</InputLabel>
+              <Input 
+                  id="my-input" 
+                  aria-describedby="my-helper-text" 
+                  value={name} 
+                  onChange={(e)=> setName(e.target.value)} 
+                  onSubmit={handleSubmit}
+              />
+              <FormHelperText id="my-helper-text">E.g. write an email.</FormHelperText>
+              <Button className='submit-btn' onClick={handleSubmit}>
+                {editing? 'edit' : 'submit'}
+              </Button>
+          </FormControl>
+      </Container>
+      <Container sx={{ mx: "auto", width: 450 }}>
+          {list.length > 0 && (
+              <Box 
+              borderColor="primary.main" 
+              border={2} 
+              width={400}
+              >
+                <List items={list} removeItem={removeItem} editItem={editItem}/>
+                <center><Button className='btn btn-primary' onClick={clearList}>
+                  clear items
+                </Button></center>
+              </Box >
+          )
+          }
+        
+      </Container>
     </Container>
   );
 }
