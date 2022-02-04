@@ -2,6 +2,14 @@ import react, {useState, useEffect} from 'react';
 import List from './List';
 import Alert from './Alert';
 import './App.css';
+import Container from '@mui/material/Container';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Input from '@mui/material/Input';
+import FormHelperText from '@mui/material/FormHelperText';
+import Button from '@mui/material/Button';
+import { Box, ThemeProvider, createTheme } from '@mui/system';
+
 
 const getLocalStorage = () => {
   let list = localStorage.getItem('list');
@@ -83,37 +91,43 @@ function App() {
   }, [list]);
 
   return (
-    <section className='container-fluid'>
-      <form className='toDoForm' onSubmit={handleSubmit}>
-        {alert.show && <Alert {...alert} removeAlert={showAlert} list={list}/>}
+    <Container>
+      <Box 
+        borderColor="primary.main" 
+        border={2} 
+        width='25%'
+        >
+        <Container>
+              {alert.show && <Alert {...alert} removeAlert={showAlert} list={list}/>}
+        </Container>
 
         <h3>To Do List </h3>
-        <div className='form-control'>
-          <input  
-              type='text' 
-              className='toDo' 
-              placeholder='e.g. write an email' 
-              value={name} 
-              onChange={(e)=> setName(e.target.value)}
-          />
+        
+        <FormControl >
+            <InputLabel htmlFor="my-input">Enter a Task</InputLabel>
+            <Input 
+                id="my-input" 
+                aria-describedby="my-helper-text" 
+                value={name} 
+                onChange={(e)=> setName(e.target.value)} 
+            />
+            <FormHelperText id="my-helper-text">E.g. write an email.</FormHelperText>
+            <Button className='submit-btn' onClick={handleSubmit}>
+              {editing? 'edit' : 'submit'}
+            </Button>
+        </FormControl>
 
-          <button className='submit-btn'>
-            {editing? 'edit' : 'submit'}
-          </button>
-        </div>
-
-      </form>
-      {list.length > 0 && (
-        <div className='toDoContainer'>
-            <List items={list} removeItem={removeItem} editItem={editItem}/>
-            <button className='btn btn-primary' onClick={clearList}>
-              clear items
-            </button>
-        </div>
-      )
-      }
-    </section >
-
+        {list.length > 0 && (
+          <Container className='toDoContainer'>
+              <List items={list} removeItem={removeItem} editItem={editItem}/>
+              <Button className='btn btn-primary' onClick={clearList}>
+                clear items
+              </Button>
+          </Container>
+        )
+        }
+      </Box >
+    </Container>
   );
 }
 
