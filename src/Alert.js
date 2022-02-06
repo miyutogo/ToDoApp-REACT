@@ -1,13 +1,15 @@
 import React, {useEffect} from 'react';
+import Typography from '@mui/material/Typography';
 
 const Alert = ({type,msg,removeAlert, list}) => {
     useEffect(() => {
         const timeout = setTimeout (() => {
             removeAlert()
-        }, 2000)
+        },1000000)
         return () => clearTimeout(timeout)
     },[list])
-	return <p className={`alert alert-${type}`}>{msg}</p>
+	return <Typography  className={`alert alert-${type}`}>{msg}</Typography>
 }
 
 export default Alert
+
