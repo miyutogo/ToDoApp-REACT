@@ -23,7 +23,7 @@ const getLocalStorage = () => {
   }
 };
 
-function App() {
+function App({type}) {
   
   const [name, setName] = useState('');
   const [list, setList] = useState(getLocalStorage());
@@ -44,10 +44,10 @@ function App() {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     minWidth: 300,
-    bgcolor: '	#b3cde0',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    bgcolor: '	#b3cde0'
   };
 
 
@@ -56,7 +56,7 @@ function App() {
     // check if the value is empty
     if(!name){
       // Alert display
-      showAlert(true,'Enter an item','red')
+      showAlert(true,'Enter a Task','red')
       handleOpen()
     }
     // check if there is a value 
@@ -73,12 +73,12 @@ function App() {
       setName('');
       setEditID(null);
       setEditing(false);
-      showAlert(true, 'Item updated','green');
+      showAlert(true, 'Task updated','green');
       handleOpen()
     }
     else{
       // show alert
-      showAlert(true,'Item added','green')
+      showAlert(true,'Task added','green')
       const newItem = { id: new Date().getTime().toString(), title:name};
 
 
@@ -93,13 +93,13 @@ function App() {
   }
 
   const clearList = () => {
-    showAlert(true, 'Empty List','red')
+    showAlert(true, 'Task list is now empty','red')
     setList([]);
     handleOpen()
   }
 
   const removeItem = (id) => {
-    showAlert(true, 'Item removed','red');
+    showAlert(true, 'Task completed','red');
     setList(list.filter((item) => item.id !== id));
     handleOpen()
   }
@@ -123,15 +123,15 @@ function App() {
 
   return (
     <div>
-     
           
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+       
       >
-        <Box sx={style} >
+        <Box sx={style}  className={`alert alert-${type}`} >
           <Grid
             container
             spacing={0}

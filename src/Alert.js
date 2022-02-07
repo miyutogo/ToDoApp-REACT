@@ -5,7 +5,7 @@ const Alert = ({type,msg,removeAlert, list}) => {
     useEffect(() => {
         const timeout = setTimeout (() => {
             removeAlert()
-        },100000)
+        },1000000)
         return () => clearTimeout(timeout)
     },[list])
 	return <Typography  className={`alert alert-${type}`}>{msg}</Typography>
