@@ -11,7 +11,7 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import FormHelperText from '@mui/material/FormHelperText';
 import Button from '@mui/material/Button';
-import { Box, ThemeProvider, createTheme } from '@mui/system';
+import { Box, ThemeProvider, createTheme, spacing } from '@mui/system';
 
 
 const getLocalStorage = () => {
@@ -109,7 +109,6 @@ function App({type}) {
     setEditing(true);
     setEditID(id);
     setName(specificItem.title);
-    handleOpen()
   }
 
   
@@ -152,40 +151,71 @@ function App({type}) {
         spacing={0}
         direction="column"
         alignItems="center"
-        sx={{
-          minHeight: '100vh',
-        }}
-        
       >    
-          <h1>To Do List </h1>
-          <FormControl >
-              <InputLabel htmlFor="my-input">Enter a Task</InputLabel>
-              <Input 
-                  id="my-input" 
-                  aria-describedby="my-helper-text" 
-                  value={name} 
-                  onChange={(e)=> setName(e.target.value)} 
-                  onSubmit={handleSubmit}
-              />
-              <FormHelperText id="my-helper-text">E.g. write an email.</FormHelperText>
-              <Button variant="contained" onClick={handleSubmit} >
-                {editing? 'edit' : 'submit'}
-              </Button>
-          </FormControl>
 
-          {list.length > 0 && (
-              <Box 
-                border={1} 
-                width={400}
-                margin={1}
-              >
-                <List items={list} removeItem={removeItem} editItem={editItem}/>
-                <center><Button className='btn btn-primary' onClick={clearList}>
-                  clear items
-                </Button></center>
-              </Box >
-          )
-          }
+        {/*  Header */}
+        <Grid 
+        xs={12}  
+        lg={12}
+        alignItems='center'
+        >
+            <Typography variant="h3" component="div" gutterBottom>To Do List </Typography>
+        </Grid>
+
+        {/*  Form */}
+        <Grid 
+        xs={12}  
+        lg={12}>
+           <FormControl >
+            <Grid 
+              container
+              spacing={0}
+              direction="row"
+              alignItems="center"	
+            >
+              <Grid xs={6} lg={8}>
+                <InputLabel htmlFor="my-input">Enter a Task</InputLabel>
+                <Input 
+                    id="my-input" 
+                    aria-describedby="my-helper-text" 
+                    value={name} 
+                    onChange={(e)=> setName(e.target.value)} 
+                    onSubmit={handleSubmit}
+                    px={5}
+                />
+              </Grid>
+              <Grid xs={1} lg={2}/>
+              <Grid xs={2} lg={2}>
+                <Button variant="contained" onClick={handleSubmit} >
+                  {editing? 'edit' : 'submit'}
+                </Button>
+              </Grid>
+            </Grid>
+           </FormControl>
+        </Grid>
+
+         <Grid 
+            xs={12}  
+            lg={12} 
+            spacing={0}
+          >
+            {list.length > 0 && (
+                <Box 
+                  border={1} 
+                  width={375}
+                  mt={1.5}
+ 
+                >
+                  <List items={list} removeItem={removeItem} editItem={editItem}/>
+                  <center><Button className='btn btn-primary' onClick={clearList}>
+                    clear items
+                  </Button></center>
+                </Box >
+            )
+            }
+         </Grid>
+
+          
         
 
       </Grid>

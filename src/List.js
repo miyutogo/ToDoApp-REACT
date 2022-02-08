@@ -35,15 +35,22 @@ const List = ({items, removeItem, editItem}) =>{
 					spacing={0}
 					direction="row"
 					alignItems="center"		
+					xs={11}
 				>  
-					<Grid xs={3}>
-						<Button  className='deleteBtn' onClick={()=>removeItem(id)}><img src={done} className={classes.button}/></Button> 
+					<Grid xs={2} lg={2}	>
+						<img src={done} className={classes.button} onClick={()=>removeItem(id)}/>
 					</Grid>
-					<Grid  xs={7}>
-						<p className='title'>{title}</p>
+					<Grid  xs={8} lg={8}	>
+						<p style={{'overflowWrap': 'break-word'}} >{title}</p>
 					</Grid>
-					<Grid  xs={2}>
-						<Button  onClick={()=>editItem(id)}><img src={edit} className={classes.button}/></Button>
+					<Grid/>
+					<Grid  
+						container
+						justifyContent="flex-end"
+						lg={2}	
+						xs={2}
+					>
+						<img src={edit} className={classes.button} onClick={()=>editItem(id)}/>
 					</Grid>
 				</Grid>
 			</article>
